@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Produk</title>
+</head>
+<body>
+  <h1>Edit Produk</h1>
+  <form action="/edit/<%= produk.id %>?_method=PUT" method="POST">
+    <label>Nama Produk: <input type="text" name="nama_produk" value="<%= produk.nama_produk %>" required></label><br>
+    <label>Kategori: <input type="text" name="category" value="<%= produk.category %>" required></label><br>
+    <label>Jumlah Produk: <input type="number" name="jumlah_produk" value="<%= produk.jumlah_produk %>" required></label><br>
+    <label>Added By: <input type="text" name="added_by" value="<%= produk.added_by %>" required></label><br>
+    <label>Added To: <input type="text" name="added_to" value="<%= produk.added_to %>" required></label><br>
+    <label>Distributor: <input type="text" name="distributor" value="<%= produk.distributor %>"></label><br>
+    <label>Is Sale: <input type="checkbox" name="is_sale" <%= produk.is_sale ? "checked" : "" %>></label><br>
+    <button type="submit">Simpan</button>
+  </form>
+</body>
+</html>

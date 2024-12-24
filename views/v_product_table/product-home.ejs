@@ -1,0 +1,47 @@
+<%- include('../layout/header.ejs') %>
+<link href="/bootstrap/css-tambahan/index.css" rel="stylesheet">
+
+
+<%- include('../layout/navbar.ejs') %>
+
+  <body>
+  <div class="col-md-9">
+    <h1>Produk List</h1>
+    <a href="/add">Add New Produk</a>
+    <table border="2">
+      <thead>
+        <tr border="2">
+          <th>Nama Produk</th>
+          <th>Category</th>
+          <th>Jumlah Produk</th>
+          <th>Added By</th>
+          <th>Added To</th>
+          <th>Distributor</th>
+          <th>QR Code</th>
+          <th>Is Sale</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% produk.forEach(product => { %>
+          <tr>
+            <td><%= product.nama_produk %></td>
+            <td><%= product.nama_category %></td>
+            <td><%= product.jumlah_produk %></td>
+            <td><%= product.added_by %></td>
+            <td><%= product.added_to %></td>
+            <td><%= product.nama_distributor %></td>
+            <td><%= product.qr_code %></td>
+            <td><%= product.is_sale %></td>
+            <td>
+              <a href="/edit/<%= product.id %>">Edit</a>
+              <a href="/delete/<%= product.id %>">Delete</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  </body>
+
+</html>
