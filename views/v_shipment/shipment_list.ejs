@@ -1,0 +1,44 @@
+<%- include('../layout/header.ejs') %>
+<%- include('../layout/navbar.ejs') %>
+
+<link href="../bootstrap/css-tambahan/index.css" rel="stylesheet">
+<body>
+  <main>  
+
+    <div class="container mt-5">
+      <h1 class="mb-4">Shipment Details</h1>
+      <a href="/add-shipment" class="btn btn-primary mb-4">Add Shipment</a>
+      
+      <!-- Table with Bootstrap styling -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>Shipment ID</th>
+              <th>Product Name</th>
+              <th>Jumlah Kirim</th>
+              <th>Tanggal Kirim</th>
+              <th>Distributed To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% shipments.forEach(shipment => { %>
+              <tr>
+                <td><%= shipment.shipment_id %></td>
+                <td><%= shipment.nama_produk %></td>
+                <td><%= shipment.jumlah_kirim %></td>
+                <td><%= shipment.tanggal_kirim %></td>
+                <td><%= shipment.distributor_1 %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+</main>  
+
+  <!-- Bootstrap JS, Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</body>

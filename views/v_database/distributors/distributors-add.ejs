@@ -1,0 +1,98 @@
+<%- include('../../layout/header.ejs') %>
+<link href="../../bootstrap/css-tambahan/index.css" rel="stylesheet">
+<%- include('../../layout/navbar.ejs') %>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="container mt-5">
+    <h1 class="mb-4">Add New Distributor</h1>
+
+    <h1>Tambah Distributor dan Produk</h1>
+    <form action="/add-distributor" method="POST">
+        <h3>Distributor</h3>
+        <label for="distributor_option">Pilih Opsi Distributor:</label><br>
+        <input type="radio" id="new_distributor" name="distributor_option" value="new" checked>
+        <label for="new_distributor">Distributor Baru</label><br>
+        <input type="radio" id="existing_distributor" name="distributor_option" value="existing">
+        <label for="existing_distributor">Distributor yang Sudah Ada</label><br>
+
+        <!-- Input untuk Distributor Baru -->
+        <div id="new_distributor_form">
+            <label for="nama_distributor">Nama Distributor Baru:</label>
+            <input type="text" id="nama_distributor" name="nama_distributor">
+        </div>
+
+        <!-- Dropdown untuk Distributor yang Sudah Ada -->
+        <div id="existing_distributor_form" style="display: none;">
+            <label for="distributor_id">Pilih Distributor:</label>
+            <select id="distributor_id" name="distributor_id">
+    <% distributors.forEach(distributor => { %>
+        <option 
+            value="<%= distributor.id %>" 
+            data-alamat="<%= distributor.alamat %>" 
+            data-kontak="<%= distributor.kontak %>">
+            <%= distributor.nama_distributor %>
+        </option>
+    <% }) %>
+</select>
+        </div>
+
+        <h3>Produk</h3>
+        <label for="nama_produk">Nama Produk:</label>
+        <input type="text" id="nama_produk" name="nama_produk"><br>
+        <label for="alamat">Alamat : </label>
+        <input type="text" id="alamat" name="alamat" required>
+        <label for="kontak">kontak:</label>
+        <input type="text" id="kontak" name="kontak" required>
+
+        <button type="submit">Simpan</button>
+    </form>
+
+    <script>
+       const distributorSelect = document.getElementById('distributor_id');
+    const alamatInput = document.getElementById('alamat');
+    const kontakInput = document.getElementById('kontak');
+
+    // Event listener untuk mengisi alamat dan kontak saat memilih distributor
+    distributorSelect.addEventListener('change', () => {
+        const selectedOption = distributorSelect.options[distributorSelect.selectedIndex];
+        const alamat = selectedOption.getAttribute('data-alamat');
+        const kontak = selectedOption.getAttribute('data-kontak');
+        
+        // Mengisi input alamat dan kontak dengan data yang dipilih
+        alamatInput.value = alamat || '';  // Jika tidak ada data, biarkan kosong
+        kontakInput.value = kontak || '';  // Jika tidak ada data, biarkan kosong
+    });
+
+    // Inisialisasi dengan distributor yang sudah dipilih sebelumnya (jika ada)
+    if (distributorSelect.value) {
+        const selectedOption = distributorSelect.options[distributorSelect.selectedIndex];
+        const alamat = selectedOption.getAttribute('data-alamat');
+        const kontak = selectedOption.getAttribute('data-kontak');
+        
+        alamatInput.value = alamat || '';
+        kontakInput.value = kontak || '';
+    }
+        const newDistributorRadio = document.getElementById('new_distributor');
+        const existingDistributorRadio = document.getElementById('existing_distributor');
+        const newDistributorForm = document.getElementById('new_distributor_form');
+        const existingDistributorForm = document.getElementById('existing_distributor_form');
+
+        // Event listener untuk mengubah tampilan form berdasarkan pilihan
+        newDistributorRadio.addEventListener('change', () => {
+            newDistributorForm.style.display = 'block';
+            existingDistributorForm.style.display = 'none';
+        });
+
+        existingDistributorRadio.addEventListener('change', () => {
+            newDistributorForm.style.display = 'none';
+            existingDistributorForm.style.display = 'block';
+        });
+    </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+</main>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<%- include('../../layout/header.ejs') %>
+<%- include('../../layout/navbar.ejs') %>
+<link href="../../bootstrap/css-tambahan/index.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+      <div class="container mt-5">
+        <h1 class="display-4 text-center mb-4">Kategori: <%= kategori %></h1>
+    
+        <% if (produk.length > 0) { %>
+          <h2 class="mb-3">Daftar Produk:</h2>
+          <ul class="list-group mb-4">
+            <% produk.forEach(item => { %>
+              <li class="list-group-item">
+                <strong>Nama Produk:</strong> <%= item.nama_produk %>
+              </li>
+            <% }); %>
+          </ul>
+        <% } else { %>
+          <p class="alert alert-warning">Tidak ada produk untuk kategori ini.</p>
+        <% } %>
+    
+        <!-- Link Back to Home -->
+        <a href="/" class="btn btn-secondary">Kembali ke Halaman Utama</a>
+      </div>
+    
+    
+
+    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  </body>
+
+

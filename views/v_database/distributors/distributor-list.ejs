@@ -1,0 +1,82 @@
+<%- include('../../layout/header.ejs') %>
+<%- include('../../layout/navbar.ejs') %>
+<link href="../../bootstrap/css-tambahan/index.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<div id="alert-container" class="d-none">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Produk berhasil dihapus!</strong> Produk yang Anda pilih telah dihapus dari daftar.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+      <div class="container mt-5">
+        <h1 class="display-4 text-center mb-4">Kategori: <%= distributor %></h1>
+    
+        <% if (produk.length > 0) { %>
+          <h2 class="mb-3">Daftar Produk:</h2>
+          <ul class="list-group mb-4">
+            <% produk.forEach(item => { %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Nama Produk:</strong> <%= item.nama_produk %>
+                <!-- Tombol Hapus -->
+                <a href="/delete-item/<%= item.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
+              </li>
+            <% }); %>
+          </ul>
+        <% } else { %>
+          <p class="alert alert-warning">Tidak ada produk untuk kategori ini.</p>
+        <% } %>
+    
+        <!-- Link Back to Home -->
+        <a href="/" class="btn btn-secondary">Kembali ke Halaman Utama</a>
+      </div>
+      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+      
+      <script>
+        // Menangani klik tombol hapus
+        document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', (event) => {
+      const productId = event.target.getAttribute('data-id');  // Ambil ID produk dari atribut data-id
+
+      // Konfirmasi sebelum menghapus
+      if (confirm('Apakah Anda yakin ingin menghapus produk ini?')) {
+        // Kirim permintaan DELETE ke server
+        fetch(`/delete-product/${productId}`, {
+          method: 'DELETE',  // Metode HTTP untuk menghapus
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Menghapus elemen produk dari daftar tanpa memuat ulang halaman
+            event.target.closest('li').remove();
+
+            // Menampilkan notifikasi sukses
+            const alertContainer = document.getElementById('alert-container');
+            alertContainer.classList.remove('d-none');  // Menampilkan alert
+
+            // Menghilangkan alert setelah 5 detik
+            setTimeout(() => {
+              alertContainer.classList.add('d-none');
+            }, 5000);
+          } else {
+            alert('Gagal menghapus produk. Coba lagi.');
+          }
+        })
+        .catch(error => {
+          console.error('Terjadi kesalahan:', error);
+          alert('Terjadi kesalahan, coba lagi.');
+        });
+      }
+    });
+  });
+      </script>
+      
+      </body>

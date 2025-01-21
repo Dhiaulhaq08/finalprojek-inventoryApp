@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Distributor</title>
+</head>
+<body>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <h1>Edit Distributor</h1>
+  <form action="/distributor/edit/<%= distributor.id %>" method="POST">
+    <label for="nama_distributor">Nama Distributor:</label>
+    <input type="text" name="nama_distributor" value="<%= distributor.nama_distributor %>" required><br>
+    <label for="alamat">Alamat:</label>
+    <textarea name="alamat" required><%= distributor.alamat %></textarea><br>
+    <label for="kontak">Kontak:</label>
+    <input type="text" name="kontak" value="<%= distributor.kontak %>" required><br>
+    <button type="submit">Update Distributor</button>
+  </form>
+  <a href="/">Back to List</a>
+  <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+</main>
+</body>
+</html>

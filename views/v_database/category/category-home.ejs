@@ -1,0 +1,35 @@
+<%- include('../../layout/header.ejs') %>
+<%- include('../../layout/navbar.ejs') %>
+<link href="../../bootstrap/css-tambahan/index.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<body>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="container mt-5">
+      <h1 class="display-4 text-center mb-4">Categories</h1>
+  
+      <!-- Link to Add New Category with Button -->
+      <a href="/categories/new" class="btn btn-success mb-4">Add New Category</a>
+  
+      <!-- List of Categories -->
+      <ul class="list-group mb-4">
+        <% categories.forEach(category => { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= category.nama_category %>
+            <span>
+              <a href="/kategori/<%= category.nama_category%>/produk" class="btn btn-warning btn-sm mr-2">Edit</a>
+              <a href="/categories/delete/<%= category.id %>" class="btn btn-danger btn-sm">Delete</a>
+            </span>
+          </li>
+        <% }); %>
+      </ul>
+  
+      <!-- Link Back to Home -->
+      <a href="/" class="btn btn-secondary">Back To Home</a>
+    </div>
+  <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

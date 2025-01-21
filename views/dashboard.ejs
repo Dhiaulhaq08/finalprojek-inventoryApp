@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Shipment Report</h1>
+   
+    <!-- Table with Bootstrap styling -->
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Shipment ID</th>
+            <th>Product Name</th>
+            <th>Jumlah Kirim</th>
+            <th>Tanggal Kirim</th>
+            <th>Distributed To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% shipments.forEach(shipment => { %>
+            <tr>
+              <td><%= shipment.shipment_id %></td>
+              <td><%= shipment.nama_produk %></td>
+              <td><%= shipment.jumlah_kirim %></td>
+              <td><%= shipment.tanggal_kirim %></td>
+              <td><%= shipment.distributor_1 %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>

@@ -1,0 +1,101 @@
+<%- include('../layout/header.ejs') %>
+<link href="../bootstrap/css-tambahan/index.css" rel="stylesheet">
+<%- include('../layout/navbar.ejs') %>
+<body>
+  <main class="container mt-5">
+      <div class="row">
+          <div class="col-md-8 mx-auto">
+              <h1 class="text-center mb-4">Add New Product</h1>
+              <form action="/add" method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
+                  <!-- Product Name -->
+                  <div class="mb-3">
+                      <label for="nama_produk" class="form-label">Product Name</label>
+                      <select id="nama_produk" name="nama_produk" required>
+                        <option value="">-- Select Product --</option>
+                        <% produk.forEach(distributor => { %>
+                          <option value="<%= distributor.nama_produk %>"><%= distributor.nama_produk%>(<%= distributor.nama_distributor%>)</option>
+                        <% }) %>
+                      </select>
+                  </div>
+
+                  <!-- Category -->
+                  <div class="mb-3">
+                      <label for="category_id" class="form-label">Category</label>
+                      <select id="category_id" name="category_id" class="form-select" required>
+                          <option value="">-- Select Category --</option>
+                          <% categories.forEach(category => { %>
+                              <option value="<%= category.id %>"><%= category.nama_category %></option>
+                          <% }) %>
+                      </select>
+                  </div>
+
+                  <!-- Quantity -->
+                  <div class="mb-3">
+                      <label for="jumlah_produk" class="form-label">Quantity</label>
+                      <input type="number" id="jumlah_produk" name="jumlah_produk" class="form-control" required>
+                  </div>
+
+                  <!-- Added By -->
+                  <div class="mb-3">
+                      <label for="added_by" class="form-label">Added By</label>
+                      <select id="added_by" name="added_by" class="form-select" required>
+                          <option value="">-- Select User --</option>
+                          <% addedBy.forEach(user => { %>
+                              <option value="<%= user.id %>"><%= user.username %> (<%= user.role %>)</option>
+                          <% }) %>
+                      </select>
+                  </div>
+
+                  <!-- Added To -->
+                  <div class="mb-3">
+                      <label for="added_to_id" class="form-label">Added To</label>
+                      <select id="added_to_id" name="added_to_id" class="form-select" required>
+                          <option value="">-- Select Page --</option>
+                          <% addedTo.forEach(page => { %>
+                              <option value="<%= page.id %>"><%= page.name %></option>
+                          <% }) %>
+                      </select>
+                  </div>
+
+                  <!-- Distributor -->
+                  <div class="mb-3">
+                      <label for="distributors_id" class="form-label">Distributor</label>
+                      <select id="distributors_id" name="distributors_id" class="form-select" required>
+                          <option value="">-- Select Distributor --</option>
+                          <% distributors.forEach(distributor => { %>
+                              <option value="<%= distributor.id %>"><%= distributor.nama_distributor %></option>
+                          <% }) %>
+                      </select>
+                  </div>
+
+                  <!-- Product Image -->
+                  <div class="mb-3">
+                      <label for="product_picture" class="form-label">Upload Product Image</label>
+                      <input type="file" id="product_picture" name="product_picture" class="form-control" accept="image/*" required>
+                  </div>
+
+                  <!-- QR Code -->
+                  <div class="mb-3">
+                      <label for="qr_code" class="form-label">QR Code</label>
+                      <input type="text" id="qr_code" name="qr_code" class="form-control">
+                  </div>
+
+                  <!-- Is Sale -->
+                  <div class="mb-3 form-check">
+                      <input type="checkbox" id="is_sale" name="is_sale" class="form-check-input">
+                      <label for="is_sale" class="form-check-label">Is on Sale</label>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Add Product</button>
+              </form>
+
+              <br>
+              <a href="/" class="btn btn-secondary">Back to Product List</a>
+          </div>
+      </div>
+
+      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+  </main>
+</body>
+
+<%- include('../layout/footer.ejs') %>

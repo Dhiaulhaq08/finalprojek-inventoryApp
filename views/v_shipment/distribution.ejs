@@ -1,0 +1,58 @@
+<%- include('../layout/header.ejs') %>
+<%- include('../layout/navbar.ejs') %>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="../bootstrap/css-tambahan/index.css" rel="stylesheet">
+<body>
+  <div class="container mt-5">
+    <!-- Cek apakah ada status dari query params -->
+    <% if (typeof status !== 'undefined' && status === 'success') { %>
+      <!-- Alert sukses kirim produk -->
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Produk berhasil dikirim ke distributor!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <script>
+        // Menyembunyikan alert setelah 5 detik
+        setTimeout(function() {
+          $('.alert').alert('close');
+        }, 5000);
+      </script>
+    <% } %>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">  
+    
+<form action="/send-products" method="POST">
+    <div class="mb-3">
+      <label for="product_id" class="form-label">Pilih Produk</label>
+      <select id="product_id" name="product_id" class="form-select">
+        <% product_list.forEach(product => { %>
+          <option value="<%= product.id %>">
+            <%= product.nama_produk %> (Stok: <%= product.jumlah_produk %>)
+          </option>
+        <% }) %>
+      </select>
+    </div>
+  
+    <div class="mb-3">
+      <label for="distributor_1_id" class="form-label">Distributed to</label>
+      <select id="distributor_1_id" name="distributor_1_id" class="form-select">
+        <% added_to.forEach(distributor => { %>
+          <option value="<%= distributor.name %>"><%= distributor.name %></option>
+        <% }) %>
+      </select>
+      <label for="jumlah_kirim_1" class="form-label">Jumlah Kirim ke Distributor 1</label>
+      <input type="number" id="jumlah_kirim_1" name="jumlah_kirim_1" class="form-control" required>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Kirim Produk</button>
+</form>
+<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+</main>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+

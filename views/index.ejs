@@ -1,26 +1,50 @@
 <%- include('layout/header.ejs') %>
 <link href="bootstrap/css-tambahan/index.css" rel="stylesheet">
 <%- include('layout/navbar.ejs') %>
-
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-            <svg class="bi"><use xlink:href="#calendar3"/></svg>
-            This week
-          </button>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafik Pengiriman</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">  
+    <h1>Grafik Pengiriman Produk</h1>
+    <canvas id="shipmentChart" width="800" height="400"></canvas>
+    <br><br><br>
+    <div class="container mt-5">
+      <h1 class="mb-4">Shipment Report</h1>
+     
+      <!-- Table with Bootstrap styling -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>No</th>
+              <th>Shipment ID</th>
+              <th>Product Name</th>
+              <th>Jumlah Kirim</th>
+              <th>Tanggal Kirim</th>
+              <th>Distributed To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% shipments.forEach((shipment, index ) => { %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= shipment.shipment_id %></td>
+                <td><%= shipment.nama_produk %></td>
+                <td><%= shipment.jumlah_kirim %></td>
+                <td><%= shipment.tanggal_kirim %></td>
+                <td><%= shipment.distributor_1 %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
       </div>
-
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-      
+    </div>
+   
+    <script src="bootstrap/js-tambahan/shipmentChart.js"></script>
     </main>
-  </div>
-</div>
-
-<%- include('layout/footer.ejs') %>
+</body>
+<%- include('layout/footer.ejs') %> 
